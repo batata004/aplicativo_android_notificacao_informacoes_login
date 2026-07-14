@@ -18,21 +18,29 @@ class MainActivity : Activity() {
     private val handler = Handler(Looper.getMainLooper())
 
     private val atualizador = object : Runnable {
+	
         override fun run() {
 
             try {
 
                 val conteudo = File(
+				
                     applicationContext.filesDir,
                     "http_status_log.txt"
+					
                 ).readText()
 
                 if (txt.text.toString() != conteudo) {
+				
                     txt.text = conteudo
-                    // rola automaticamente até o final
+					
+                    //Rola automaticamente para o fim.
                     scroll.post {
+					
                         scroll.fullScroll(android.view.View.FOCUS_DOWN)
+						
                     }
+					
                 }
 
             } catch (_: Exception) {
@@ -42,35 +50,40 @@ class MainActivity : Activity() {
             }
 
             handler.postDelayed(this, 1000)
+			
         }
+		
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+	
+		requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+
+
+	
         super.onCreate(savedInstanceState)
 
-		
-		
-		requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
-		
 
 
         txt = TextView(this)
-				
-		txt.textSize = 18f
-		txt.setPadding(30,30,30,30)		
+
+		txt.textSize = 18f	
+			
+		txt.layoutParams = ScrollView.LayoutParams(
 		
-        txt.layoutParams =
-            android.widget.LinearLayout.LayoutParams(
-                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-            )
+			ScrollView.LayoutParams.MATCH_PARENT,
+			ScrollView.LayoutParams.WRAP_CONTENT
+			
+		)
+		
+
 
         scroll = ScrollView(this)
-        scroll.layoutParams =
-            android.widget.LinearLayout.LayoutParams(
-                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                android.widget.LinearLayout.LayoutParams.MATCH_PARENT
-            )
+		
+		scroll.setPadding(50, 50, 50, 50)
+		
+		
+		
         scroll.addView(txt)
 
         setContentView(scroll)
@@ -78,33 +91,45 @@ class MainActivity : Activity() {
 
 
         if (!notificationPermissionGranted()) {
+		
             startActivity(
+			
                 Intent(
+				
                     Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
+					
                 )
+				
             )
+			
         }
     }
 
     override fun onResume() {
+	
         super.onResume()
         handler.post(atualizador)
+		
     }
 
     override fun onPause() {
+	
         super.onPause()
         handler.removeCallbacks(atualizador)
+		
     }
 
     private fun notificationPermissionGranted(): Boolean {
 
-        val enabledListeners =
-            Settings.Secure.getString(
-                contentResolver,
-                "enabled_notification_listeners"
-            )
+        val enabledListeners = Settings.Secure.getString(
+	
+			contentResolver,
+			"enabled_notification_listeners"
+			
+		)
 
-        return enabledListeners != null &&
-               enabledListeners.contains(packageName)
+        return enabledListeners != null && enabledListeners.contains(packageName)
+		
     }
+	
 }
