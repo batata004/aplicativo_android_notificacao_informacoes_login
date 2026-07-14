@@ -1,0 +1,10 @@
+Este aplicativo foi criado através do prompt disponível em "https://chatgpt.com/c/6a5124f8-d45c-83e9-90aa-3cdb52f89b84".
+
+Em resumo: 
+
+1) deve-se criar um repositório no GitHub clicando em "+" -> "New repository", depois deve-se realizar upload dos arquivos deste aplicativo arrastando o conteúdo do diretório "aplicativo_android" para dentro do GitHub (cuidado pois o arquivo ".github/workflows/build.yml" provavelmente não será enviado e precisará ser criado manualmente pois um dos diretórios pai desse arquivo começa com "." e o Chrome não envia esse tipo de diretório) e depois utiliza-se a opção "Actions" -> "Build APK" para gerar o arquivo "*.apk". Ao final pode-se instalar esse aplicativo no celular (o Android em suas versões mais recentes tem dificultado a instalação e concessão de permissões de aplicativos instalados por fora da "Google Play Store", ainda assim basta clicar em algumas opções que ao final será possível instalar e utilizar este aplicativo normalmente);
+
+2) abaixo constam os arquivos mais importantes e que provavelmente serão utilizados com mais frequência caso deseje alterar alguma funcionalidade:
+
+	Z:\htdocs\economizafloripa.com.br\algoritmo\aplicativo_android\app\src\main\java\com\tratarnotificacoes\NotificationSvc.kt
+	Z:\htdocs\economizafloripa.com.br\algoritmo\aplicativo_android\app\src\main\java\com\tratarnotificacoes\MainActivity.kt
