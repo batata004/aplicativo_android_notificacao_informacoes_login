@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.widget.ScrollView
 import android.widget.TextView
 import java.io.File
+import android.view.ViewGroup
 
 class MainActivity : Activity() {
 
@@ -68,11 +69,11 @@ class MainActivity : Activity() {
         txt = TextView(this)
 
 		txt.textSize = 18f	
-			
-		txt.layoutParams = ScrollView.LayoutParams(
+
+		txt.layoutParams = ViewGroup.LayoutParams(
 		
-			ScrollView.LayoutParams.MATCH_PARENT,
-			ScrollView.LayoutParams.WRAP_CONTENT
+			ViewGroup.LayoutParams.MATCH_PARENT,
+			ViewGroup.LayoutParams.WRAP_CONTENT
 			
 		)
 		
