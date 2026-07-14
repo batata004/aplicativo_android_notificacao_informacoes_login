@@ -75,7 +75,7 @@ class NotificationSvc: NotificationListenerService() {
 	val codigo = c.responseCode
 
 	arquivo.appendText(
-		 "${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())} HTTP $codigo URL=$u\n"
+		 "\n\n\n${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())} HTTP $codigo URL=$u\n"
 	)
 
 	c.disconnect()

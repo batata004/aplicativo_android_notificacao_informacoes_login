@@ -56,8 +56,8 @@ class MainActivity : Activity() {
 
         txt = TextView(this)
 				
-		txt.textSize = 16f
-		txt.setPadding(20,20,20,20)		
+		txt.textSize = 18f
+		txt.setPadding(30,30,30,30)		
 		
         txt.layoutParams =
             android.widget.LinearLayout.LayoutParams(
