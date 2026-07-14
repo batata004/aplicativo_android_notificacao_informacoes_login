@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import android.widget.EditText
+import android.widget.ScrollView
+import android.widget.TextView
 import java.io.File
 
 class MainActivity : Activity() {
 
-    private lateinit var txt: EditText
+	private lateinit var txt: TextView
+	private lateinit var scroll: ScrollView
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -26,17 +28,16 @@ class MainActivity : Activity() {
                 ).readText()
 
                 if (txt.text.toString() != conteudo) {
-
-                    txt.setText(conteudo)
-
+                    txt.text = conteudo
                     // rola automaticamente até o final
-                    txt.setSelection(txt.text.length)
-
+                    scroll.post {
+                        scroll.fullScroll(android.view.View.FOCUS_DOWN)
+                    }
                 }
 
             } catch (_: Exception) {
 
-                txt.setText("Log vazio")
+                txt.text = "Ainda não foram identificadas notificações válidas"
 
             }
 
@@ -47,22 +48,26 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        txt = EditText(this)
 
-        txt.isFocusable = false
-        txt.isFocusableInTouchMode = false
-        txt.isClickable = false
-        txt.isLongClickable = true
 
-        txt.setTextIsSelectable(true)
-
+        txt = TextView(this)
         txt.layoutParams =
+            android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+        scroll = ScrollView(this)
+        scroll.layoutParams =
             android.widget.LinearLayout.LayoutParams(
                 android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
                 android.widget.LinearLayout.LayoutParams.MATCH_PARENT
             )
+        scroll.addView(txt)
 
-        setContentView(txt)
+        setContentView(scroll)
+
+
 
         if (!notificationPermissionGranted()) {
             startActivity(
