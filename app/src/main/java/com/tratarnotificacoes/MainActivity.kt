@@ -48,9 +48,17 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+		
+		
+		requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+		
 
 
         txt = TextView(this)
+				
+		txt.textSize = 16f
+		txt.setPadding(20,20,20,20)		
+		
         txt.layoutParams =
             android.widget.LinearLayout.LayoutParams(
                 android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
