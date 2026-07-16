@@ -81,13 +81,27 @@ class MainActivity : Activity() {
 
         scroll = ScrollView(this)
 		
-		scroll.setPadding(50, 50, 50, 50)
-		
 		
 		
         scroll.addView(txt)
 
         setContentView(scroll)
+
+		scroll.setOnApplyWindowInsetsListener { view, insets ->
+
+			val temp8484 = insets.getInsets(
+				android.view.WindowInsets.Type.systemBars()
+			)
+
+			view.setPadding(
+				50 + temp8484.left,
+				50 + temp8484.top,
+				50 + temp8484.right,
+				50 + temp8484.bottom
+			)
+
+			insets
+		}
 
 
 
